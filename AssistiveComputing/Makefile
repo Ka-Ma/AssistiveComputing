@@ -3,8 +3,8 @@
 CFLAGS=-Wall -O3 -g 
 #-I/$(RGB_INCDIR) -I/$(RGB_LIBDIR)
 CXXFLAGS=$(CFLAGS)
-OBJECTS=test.o
-BINARIES=test
+OBJECTS=test.o buttons.o
+BINARIES=test buttons
 
 # Where our library resides. You mostly only need to change the
 # RGB_LIB_DISTRIBUTION, this is where the library is checked out.
@@ -21,9 +21,14 @@ $(RGB_LIBRARY): FORCE
 	$(MAKE) -C $(RGB_LIBDIR)
 
 test: $(RGB_LIBRARY)
-	echo "making test"
+	@echo "making test"
 	$(CXX) $(CFLAGS) $< test.cpp -o $@ $(LDFLAGS)
-	echo "made test"
+	@echo "made test"
+	
+buttons: 
+	@echo "making buttons"
+	$(CXX) -o buttons -I/../wiringPi/wiringPi/ -L/../wiringPi/wiringPi/ -lwiringPi buttons.cpp
+	@echo "made buttons"
 
 clean:
 	rm -f $(OBJECTS) $(BINARIES)
