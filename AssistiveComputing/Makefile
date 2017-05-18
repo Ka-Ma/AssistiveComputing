@@ -22,7 +22,7 @@ $(RGB_LIBRARY): FORCE
 
 test: $(RGB_LIBRARY)
 	@echo "making test"
-	$(CXX) $(CFLAGS) $< test.cpp -o $@ $(LDFLAGS)
+	$(CXX) $(CFLAGS) $< test.cpp -o $@ $(LDFLAGS) -I/$(RGB_INCDIR)
 	@echo "made test"
 	
 buttonsOnePin: 
